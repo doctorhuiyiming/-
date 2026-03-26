@@ -16,13 +16,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "uploads")
+os.makedirs(UPLOAD_DIR, exist_ok=True)  # ensure exists before StaticFiles mount
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
     logger.info("Starting Drama Factory backend...")
-    os.makedirs(UPLOAD_DIR, exist_ok=True)
     create_tables()
     logger.info("Database tables created / verified.")
     yield
