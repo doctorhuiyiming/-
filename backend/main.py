@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 from contextlib import asynccontextmanager
@@ -25,6 +26,21 @@ async def lifespan(app: FastAPI):
     logger.info("Starting Drama Factory backend...")
     create_tables()
     logger.info("Database tables created / verified.")
+
+    # Re-trigger parsing for any projects stuck in "解析中" after a restart
+    from database import SessionLocal
+    from models import Project
+    from services.mock_ai import simulate_parsing
+    from services.sse_manager import sse_manager
+    db = SessionLocal()
+    try:
+        stuck = db.query(Project).filter(Project.status == "解析中").all()
+        for p in stuck:
+            logger.info(f"Re-triggering parsing for stuck project: {p.id}")
+            asyncio.create_task(simulate_parsing(p.id, sse_manager))
+    finally:
+        db.close()
+
     yield
     # Shutdown
     logger.info("Drama Factory backend shutting down.")

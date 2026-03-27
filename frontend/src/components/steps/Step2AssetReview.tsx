@@ -173,8 +173,8 @@ const Step2AssetReview: React.FC = () => {
           </div>
           <h3 className="text-lg font-semibold text-gray-800 mb-2">AI 正在解析视频资产...</h3>
           <p className="text-sm text-gray-500 text-center max-w-sm">
-            系统正在识别角色、场景和道具，预计需要 3-10 分钟。<br />
-            解析完成后页面将自动更新。
+            系统正在识别角色、场景和道具，预计需要 3-4 秒。<br />
+            解析完成后页面将自动刷新资产列表。
           </p>
           <div className="mt-6 flex items-center gap-2 text-xs text-blue-600 bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
             <span className="relative flex h-2 w-2">
