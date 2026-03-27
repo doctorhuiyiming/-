@@ -83,7 +83,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ targetRegion, onClose }) => {
       });
       addProject(res.data);
       setActiveProjectId(res.data.id);
-      setActiveTab('0');
+      setActiveTab('2');
       onClose();
     } catch {
       setError('提交失败，请检查后端服务是否运行');
