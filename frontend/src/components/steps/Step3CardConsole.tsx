@@ -277,10 +277,10 @@ const Step3CardConsole: React.FC = () => {
                 {/* Col 3: Original dialogue */}
                 <div className="px-3 py-3 border-r border-gray-100">
                   <div className="space-y-1.5">
-                    {slice.original_dialogue.length === 0 ? (
+                    {(!slice.original_dialogue || slice.original_dialogue.length === 0) ? (
                       <span className="text-xs text-gray-400 italic">无对白</span>
                     ) : (
-                      slice.original_dialogue.map((d, i) => (
+                      (Array.isArray(slice.original_dialogue) ? slice.original_dialogue : []).map((d, i) => (
                         <div key={i} className="text-xs">
                           <span className="inline-block bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded text-xs font-medium mr-1">
                             {d.speaker}
